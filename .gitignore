@@ -1,0 +1,24 @@
+.*
+!/.gitignore
+!/.github
+!/.pre-commit-config.yaml
+
+/build
+/dist
+*.egg-info/
+**/__pycache__/*
+
+# evalkit run artifacts
+*.scorecard.json
+*.run.json
+*.run.ckpt
+outbox.jsonl
+scores.jsonl
+ratings.jsonl
+preferences.jsonl
+examples/*/results/
+examples/*/results-*/
+
+# ad-hoc report / screenshot artifacts from manual runs at the repo root
+/*.html
+/*.png

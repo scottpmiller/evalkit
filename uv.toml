@@ -1,0 +1,6 @@
+# Resolve dependencies from public PyPI, regardless of any machine-level uv
+# config. This keeps `uv lock`/`uv sync` reproducible for every contributor
+# and matches what CI (which has no private index) resolves against.
+[[index]]
+url = "https://pypi.org/simple"
+default = true

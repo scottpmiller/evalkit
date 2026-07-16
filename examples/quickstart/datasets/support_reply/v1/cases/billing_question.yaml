@@ -1,0 +1,7 @@
+id: billing_question
+labels: {category: billing}
+input:
+  ticket_text: 'Where can I see all the charges on my account for last month?'
+  customer_tier: free
+expected:
+  intent: question

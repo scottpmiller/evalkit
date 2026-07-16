@@ -1,0 +1,20 @@
+# Recorded PAIRWISE judgments for the support-reply suite.
+# Order-independent: keyed by the unordered {baseline, candidate} reply pair;
+# the candidate wins every pair here.
+
+- a: "Thanks for reaching out - we'll get back to you."
+  b: "I'm sorry for the duplicate charge - I've refunded it, and it will appear within 5-7 business days."
+  winner: "I'm sorry for the duplicate charge - I've refunded it, and it will appear within 5-7 business days."
+  rationale: Candidate resolves the issue with empathy and a timeframe.
+- a: "Thanks for reaching out - we'll get back to you."
+  b: "Happy to help! You can see every charge under Account -> Billing, and I'm here if anything looks off."
+  winner: "Happy to help! You can see every charge under Account -> Billing, and I'm here if anything looks off."
+  rationale: Candidate actually answers the question.
+- a: "Thanks for reaching out - we'll get back to you."
+  b: "I completely understand your frustration about the downtime, and I'm sorry it cost you sales. Here's how I'll make it right."
+  winner: "I completely understand your frustration about the downtime, and I'm sorry it cost you sales. Here's how I'll make it right."
+  rationale: Candidate acknowledges the impact and commits to a fix.
+- a: "Thanks for reaching out - we'll get back to you."
+  b: "You're right that you were billed twice - I've reversed the duplicate, which will post back within 5-7 business days."
+  winner: "You're right that you were billed twice - I've reversed the duplicate, which will post back within 5-7 business days."
+  rationale: Candidate validates the customer and resolves the charge.

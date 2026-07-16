@@ -1,0 +1,7 @@
+id: double_charge
+labels: {category: billing}
+input:
+  ticket_text: 'I was billed twice for March and I need my money back as soon as possible.'
+  customer_tier: pro
+expected:
+  intent: refund

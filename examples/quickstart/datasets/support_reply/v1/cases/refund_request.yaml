@@ -1,0 +1,7 @@
+id: refund_request
+labels: {category: billing}
+input:
+  ticket_text: 'Please refund my duplicate charge from March; I was billed for the Pro plan twice.'
+  customer_tier: pro
+expected:
+  intent: refund

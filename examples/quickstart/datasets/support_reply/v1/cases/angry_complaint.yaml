@@ -1,0 +1,7 @@
+id: angry_complaint
+labels: {category: reliability}
+input:
+  ticket_text: 'This is unacceptable. Your service was down all day and it cost me sales.'
+  customer_tier: pro
+expected:
+  intent: complaint

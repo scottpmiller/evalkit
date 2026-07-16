@@ -1,0 +1,23 @@
+# Recorded judge scores keyed by the exact reply under judgement, so each
+# variant's output is scored independently and deterministically offline.
+# Replace by capturing real judge calls (--judge-mode live) or hand-label.
+
+"Thanks for reaching out - we'll get back to you.":
+  scores: {empathy: 2, accuracy: 3}
+  rationale: Generic and impersonal; acknowledges nothing specific.
+
+"I'm sorry for the duplicate charge - I've refunded it, and it will appear within 5-7 business days.":
+  scores: {empathy: 5, accuracy: 5}
+  rationale: Apologizes, resolves the issue, and sets a clear timeframe.
+
+"Happy to help! You can see every charge under Account -> Billing, and I'm here if anything looks off.":
+  scores: {empathy: 4, accuracy: 5}
+  rationale: Warm and directly answers where to find the charges.
+
+"I completely understand your frustration about the downtime, and I'm sorry it cost you sales. Here's how I'll make it right.":
+  scores: {empathy: 5, accuracy: 4}
+  rationale: Strong empathy; names the impact, promises a remedy.
+
+"You're right that you were billed twice - I've reversed the duplicate, which will post back within 5-7 business days.":
+  scores: {empathy: 5, accuracy: 5}
+  rationale: Validates the customer and gives a concrete resolution + timeframe.

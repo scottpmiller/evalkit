@@ -1,0 +1,102 @@
+# evalkit quickstart suite: a support-reply eval.
+#
+# One suite exercising every grader family against a deterministic offline
+# stub, so it runs with no network and no API keys:
+#   - deterministic guardrails (length, no-PII, non-empty)
+#   - classification (intent routing, with ground truth)
+#   - a custom per-case grader (acknowledges_customer) + custom aggregate
+#     grader (distinct_reply_rate), from graders.py
+#   - an LLM judge (reply quality) as the headline win metric
+#   - a head-to-head pairwise config
+#
+# Run it:
+#   evalkit --plugins examples.quickstart.graders gate \
+#       --suite examples/quickstart/suite.yaml --mode replay
+#
+# Paths are relative to this file.
+
+project: quickstart
+suite: support_reply
+dataset: datasets/support_reply/v1
+dataset_version: v1
+mode_default: replay
+replay_fixtures: fixtures/support_reply_replay.yaml
+
+# The custom offline stub adapter (examples/quickstart/adapter.py). In replay
+# mode the engine ignores this and reads replay_fixtures instead; in any other
+# mode it builds this adapter (which needs no network).
+adapter:
+  type: canned_support
+
+graders:
+  # --- deterministic per-case guardrails --------------------------------
+  - type: max_chars
+    name: length_ok
+    field: output.reply
+    maximum: 300
+  - type: regex_absent
+    name: no_pii
+    field: output.reply
+    pattern: '\b\d{3}-\d{2}-\d{4}\b'   # a US SSN must never appear in a reply
+  - type: non_empty
+    name: reply_present
+    field: output.reply
+
+  # --- classification (aggregate): did we route the ticket correctly? ---
+  - type: classification
+    name: intent
+    predicted_ref: output.intent
+    expected_ref: expected.intent
+    positive_labels: [refund]           # the class we must not miss
+    negative_labels: [question, complaint]
+
+  # --- custom graders (examples/quickstart/graders.py) ------------------
+  - type: acknowledges_customer
+  - type: distinct_reply_rate
+
+  # --- LLM judge (per-case): the headline quality signal ----------------
+  - type: llm_judge
+    name: quality
+    content_ref: output.reply
+    scale: 5
+    dimensions:
+      - {key: empathy, description: "Acknowledges the customer's situation."}
+      - {key: accuracy, description: 'Consistent with the ticket; resolves it.'}
+    context_refs:
+      ticket: input.ticket_text
+    model: claude-sonnet-4-6
+    judge_version: v1
+    replay_path: fixtures/support_reply_judge.yaml
+
+variants:
+  baseline:
+    model: claude-haiku-4-5
+    prompt_version: v1
+  candidate:
+    model: claude-sonnet-4-6
+    prompt_version: v2
+
+n_samples: 1
+
+thresholds:
+  win_metric: quality.overall
+  win_higher_is_better: true
+  win_min_delta: 0.02
+  on_regression: warn
+  guardrails:
+    # The candidate must never regress intent routing or leak PII.
+    - metric: false_negative_rate
+      max: 0.10
+      must_not_increase: true
+    - metric: no_pii
+      min: 1.0
+    - metric: errors
+      max: 0
+  # Head-to-head A-vs-B judging (evalkit pairwise --a baseline --b candidate).
+  # Live uses `model`; replay uses recorded, order-independent judgments.
+  pairwise:
+    content_ref: output.reply
+    context_refs: {ticket: input.ticket_text}
+    judge_version: v1
+    model: claude-sonnet-4-6
+    replay_path: fixtures/support_reply_pairwise.yaml
