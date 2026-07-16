@@ -11,8 +11,8 @@ suspicious). Predicted and expected labels are mapped to positive/negative via
 the configured label sets, so the grader is reusable for any binary verdict.
 """
 
-from evalkit import models, refs
-from evalkit.graders import base
+from evalcore import models, refs
+from evalcore.graders import base
 
 
 def _safe_div(numerator: float, denominator: float) -> float:

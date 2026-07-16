@@ -16,10 +16,10 @@ import inspect
 import statistics
 import uuid
 
-from evalkit import loader, models, store
-from evalkit import retry as retry_mod
-from evalkit.adapters import base as adapters_base
-from evalkit.graders import base as graders_base
+from evalcore import loader, models, store
+from evalcore import retry as retry_mod
+from evalcore.adapters import base as adapters_base
+from evalcore.graders import base as graders_base
 
 
 async def _invoke_with_retry(

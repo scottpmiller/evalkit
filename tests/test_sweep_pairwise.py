@@ -3,7 +3,7 @@
 import asyncio
 import unittest
 
-from evalkit import models, pairwise, sweep
+from evalcore import models, pairwise, sweep
 
 
 def _card(variant, metrics):

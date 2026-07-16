@@ -16,7 +16,7 @@ mode-selected (Anthropic / OpenAI / replay) exactly like the rubric judge.
 import os
 import typing
 
-from evalkit import models, refs
+from evalcore import models, refs
 
 _SYSTEM = (
     'You are a careful, unbiased evaluator comparing two candidate '
@@ -168,7 +168,7 @@ class ReplayPairwiseClient:
 
     def __init__(self, fixtures: str | list):
         if isinstance(fixtures, str):
-            from evalkit import loader
+            from evalcore import loader
 
             fixtures = loader.load_data_file(fixtures)
         # load_data_file returns {} for a bare list file under JSON fallback;

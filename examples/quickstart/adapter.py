@@ -18,8 +18,8 @@ Swap this class for one that calls your real system and the rest of the suite
 CLI or a plain import in the Python API.
 """
 
-from evalkit import models
-from evalkit.adapters import base
+from evalcore import models
+from evalcore.adapters import base
 
 #: Baseline (v1) collapses onto a single generic reply for every ticket.
 _GENERIC_REPLY = "Thanks for reaching out - we'll get back to you."

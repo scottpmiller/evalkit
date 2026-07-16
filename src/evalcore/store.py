@@ -17,7 +17,7 @@ flat ``eval_runs``/``eval_scores`` schema.
 import json
 import pathlib
 
-from evalkit import models
+from evalcore import models
 
 
 def write_scorecard(

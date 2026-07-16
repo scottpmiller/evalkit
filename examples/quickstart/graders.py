@@ -14,8 +14,8 @@ Nothing here leaks into the engine.
 
 import re
 
-from evalkit import models
-from evalkit.graders import base
+from evalcore import models
+from evalcore.graders import base
 
 # Registering the adapter alongside the graders means one plug-in module wires
 # up the whole consumer (adapter + custom graders).

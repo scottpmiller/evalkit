@@ -26,7 +26,7 @@ happens once, at the edge, so fragments compose (a ``run`` body and an
 
 import typing
 
-from evalkit import models
+from evalcore import models
 
 
 @typing.runtime_checkable
@@ -75,7 +75,7 @@ def per_case_matrix(run: models.RunResult) -> tuple[list[str], list[dict]]:
 
     Returns ``(metric_names, rows)`` where each row is
     ``{label, error, output, cells}`` - ``cells`` maps each per-case metric
-    to its :class:`~evalkit.models.Score` (or is absent). Reporters format
+    to its :class:`~evalcore.models.Score` (or is absent). Reporters format
     this into a case x metric table so a low aggregate points at the case
     that caused it.
     """
@@ -128,7 +128,7 @@ def render_agreement(
     render = getattr(reporter, 'agreement', None)
     if callable(render):
         return render(result)
-    from evalkit import report
+    from evalcore import report
 
     return report.render_agreement(result)
 
@@ -141,7 +141,7 @@ def render_preferences(
     render = getattr(reporter, 'preferences', None)
     if callable(render):
         return render(result)
-    from evalkit import report
+    from evalcore import report
 
     return report.render_preferences(result)
 
@@ -154,6 +154,6 @@ def render_pairwise_agreement(
     render = getattr(reporter, 'pairwise_agreement', None)
     if callable(render):
         return render(result)
-    from evalkit import report
+    from evalcore import report
 
     return report.render_pairwise_agreement(result)

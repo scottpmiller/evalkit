@@ -12,7 +12,7 @@ Verdict: any guardrail breach -> ``fail``; else win regressed -> ``warn``; else
 ``pass``. The on-regression policy is configurable per suite.
 """
 
-from evalkit import models
+from evalcore import models
 
 _EPS = 1e-9
 

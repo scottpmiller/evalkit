@@ -7,9 +7,9 @@ import unittest
 
 import yaml
 
-from evalkit import compare, loader, models, pairwise, refs, sweep
-from evalkit.adapters import http as http_adapter
-from evalkit.graders import classification
+from evalcore import compare, loader, models, pairwise, refs, sweep
+from evalcore.adapters import http as http_adapter
+from evalcore.graders import classification
 
 
 def _card(name, **metrics):

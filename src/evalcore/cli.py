@@ -1,20 +1,20 @@
-"""evalkit command-line interface.
+"""evalcore command-line interface.
 
-    python -m evalkit.cli run   --suite S --variant V [--mode replay] [--out F]
-                                [--checkpoint F [--resume]]
-    python -m evalkit.cli gate  --suite S [--baseline B --candidate C]
+    python -m evalcore.cli run  --suite S --variant V [--mode replay] [--out F]
+                               [--checkpoint F [--resume]]
+    python -m evalcore.cli gate --suite S [--baseline B --candidate C]
                                 [--mode replay] [--export OUTBOX]
-    python -m evalkit.cli compare --suite S --baseline F1 --candidate F2
-    python -m evalkit.cli sweep --suite S [--variants a,b,c] [--mode replay]
-    python -m evalkit.cli pairwise --suite S --a V1 --b V2 [--mode replay]
+    python -m evalcore.cli compare --suite S --baseline F1 --candidate F2
+    python -m evalcore.cli sweep --suite S [--variants a,b,c] [--mode replay]
+    python -m evalcore.cli pairwise --suite S --a V1 --b V2 [--mode replay]
                                 [--preferences P]
-    python -m evalkit.cli rate  --run R --ratings F --dimensions a,b
-    python -m evalkit.cli rank  --run-a A --run-b B --preferences P
+    python -m evalcore.cli rate  --run R --ratings F --dimensions a,b
+    python -m evalcore.cli rank  --run-a A --run-b B --preferences P
                                 --dimensions a,b
-    python -m evalkit.cli agreement --run R --ratings F --dimensions a,b
-    python -m evalkit.cli preferences --run-a A --run-b B --preferences P
+    python -m evalcore.cli agreement --run R --ratings F --dimensions a,b
+    python -m evalcore.cli preferences --run-a A --run-b B --preferences P
                                 [--report html] [--report-out F]
-    python -m evalkit.cli report --run R [--ratings F --dimensions a,b]
+    python -m evalcore.cli report --run R [--ratings F --dimensions a,b]
                                 [--report html] [--report-out F]
 
 ``gate`` is the CI workhorse: it runs the baseline and candidate variants and
@@ -31,10 +31,10 @@ import os
 import pathlib
 import sys
 
-from evalkit import compare as compare_mod
-from evalkit import loader, rating, report, reporters, runner, store
-from evalkit import pairwise as pairwise_mod
-from evalkit import sweep as sweep_mod
+from evalcore import compare as compare_mod
+from evalcore import loader, rating, report, reporters, runner, store
+from evalcore import pairwise as pairwise_mod
+from evalcore import sweep as sweep_mod
 
 
 def _load_plugins(spec: str | None) -> None:
@@ -356,7 +356,7 @@ def _cmd_report(args: argparse.Namespace) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     """Construct the argument parser (exposed for tests)."""
-    parser = argparse.ArgumentParser(prog='evalkit')
+    parser = argparse.ArgumentParser(prog='evalcore')
     parser.add_argument(
         '--plugins',
         help='comma-separated modules to import (register custom graders)',

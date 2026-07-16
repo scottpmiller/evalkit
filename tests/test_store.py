@@ -5,7 +5,7 @@ import pathlib
 import tempfile
 import unittest
 
-from evalkit import models, store
+from evalcore import models, store
 
 
 def _run():

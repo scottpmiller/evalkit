@@ -1,6 +1,6 @@
-# evalkit — design overview
+# evalcore — design overview
 
-evalkit is a **consumer-agnostic** evaluation engine. It scores a candidate
+evalcore is a **consumer-agnostic** evaluation engine. It scores a candidate
 against a baseline over a fixed dataset, applies guardrails plus one headline
 win metric, and produces a gate verdict. It knows nothing about any particular
 system under test; a *consumer* supplies the system-specific pieces as data and
@@ -21,7 +21,7 @@ every new consumer reopens the core.
 
 This shape is well-trodden — promptfoo, OpenAI Evals, Braintrust, and LangSmith
 all converge on the same pipeline (case → target → graders → comparison →
-gate). evalkit is not inventing the abstraction; it is drawing the line so the
+gate). evalcore is not inventing the abstraction; it is drawing the line so the
 engine stays reusable across unrelated systems.
 
 ## 2. Generic vs. consumer-specific
@@ -91,7 +91,7 @@ A tempting wrong turn is a central "eval service" that calls out to every
 team's system. That inverts the dependency (the platform needs network + auth
 into every consumer's environment) and becomes a bottleneck. Instead:
 
-- **evalkit is a library.** It runs **in the consumer's CI**, right next to the
+- **evalcore is a library.** It runs **in the consumer's CI**, right next to the
   system under test, where the network path and the service's own auth already
   exist. Runner, adapters, graders, and the comparison engine all ship here.
 - **An optional shared results store is the only central component** — a column
@@ -118,7 +118,7 @@ A consumer adds an eval tree (its own repo, or a directory like
 
 The engine supplies runner, comparison, gate, store, reporters, and the CLI.
 That ratio — four data files vs. a whole engine — is the genericity test: if
-onboarding a consumer ever requires editing `src/evalkit/`, that's an
+onboarding a consumer ever requires editing `src/evalcore/`, that's an
 abstraction leak to fix at the seam, not a fork.
 
 ## 6. Results store & outbox

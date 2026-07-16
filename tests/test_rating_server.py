@@ -11,7 +11,7 @@ import unittest
 import urllib.request
 from unittest import mock
 
-from evalkit import models, rating, store
+from evalcore import models, rating, store
 
 
 class HelperTests(unittest.TestCase):
@@ -177,7 +177,7 @@ class HandlerTests(unittest.TestCase):
 
 
 def store_ratings(path):
-    from evalkit import store
+    from evalcore import store
 
     return store.read_ratings(path)
 

@@ -7,8 +7,8 @@ import tempfile
 import unittest
 from unittest import mock
 
-from evalkit import models
-from evalkit.graders import judge
+from evalcore import models
+from evalcore.graders import judge
 
 DIMS = [{'key': 'clarity', 'description': 'clear?'}]
 

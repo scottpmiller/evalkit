@@ -26,7 +26,7 @@ import statistics
 import threading
 import webbrowser
 
-from evalkit import models, refs, store
+from evalcore import models, refs, store
 
 # Artifact rendering is type-driven, not consumer-specific: a panel's ``kind``
 # decides how the browser shows it. File-backed kinds (image/pdf) stream
@@ -383,7 +383,7 @@ def _derive_panels(
 # bare ``SCALE``/``DIMS`` tokens that could collide with page text.
 _PAGE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>evalkit &middot; blind rating</title><style>
+<title>evalcore &middot; blind rating</title><style>
 :root{
   --bg:#f5f6f8;--panel:#fff;--panel-2:#fafbfc;--ink:#1a1d21;--muted:#68707a;
   --line:#e3e6ea;--brand:#2f6fed;--brand-ink:#fff;--on:#1f8f5f;--on-ink:#fff;
@@ -474,7 +474,7 @@ button.ghost{background:transparent;color:var(--muted)}
 </style></head><body>
 <header>
   <div class="hrow">
-    <span class="brand">evalkit<small>blind rating</small></span>
+    <span class="brand">evalcore<small>blind rating</small></span>
     <span class="who">rater <span class="chip" id="rater"></span>
       <span id="pos"></span></span>
   </div>
@@ -844,7 +844,7 @@ def serve(
 # overall and per dimension. ``__CONFIG__`` is replaced with ``{dims}``.
 _RANK_PAGE = """<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>evalkit &middot; blind ranking</title><style>
+<title>evalcore &middot; blind ranking</title><style>
 :root{
   --bg:#f5f6f8;--panel:#fff;--panel-2:#fafbfc;--ink:#1a1d21;--muted:#68707a;
   --line:#e3e6ea;--brand:#2f6fed;--brand-ink:#fff;--on:#1f8f5f;--on-ink:#fff;
@@ -938,7 +938,7 @@ button.ghost{background:transparent;color:var(--muted)}
 </style></head><body>
 <header>
   <div class="hrow">
-    <span class="brand">evalkit<small>blind ranking</small></span>
+    <span class="brand">evalcore<small>blind ranking</small></span>
     <span class="who">rater <span class="chip" id="rater"></span>
       <span id="pos"></span></span>
   </div>
@@ -1108,7 +1108,7 @@ class _RankApp:
     "Option 1"/"Option 2" columns whose A/B orientation is seeded per
     ``(rater, item)`` - so position bias is counterbalanced across raters -
     and un-blinds each pick back to *variant* terms server-side before it is
-    written as a :class:`~evalkit.models.Preference`.
+    written as a :class:`~evalcore.models.Preference`.
     """
 
     def __init__(
@@ -1296,7 +1296,7 @@ def serve_rank(
 
     ``run_a``/``run_b`` are the two variants' saved runs; the app aligns them
     by ``(case_id, sample_idx)`` and appends one
-    :class:`~evalkit.models.Preference` per ranked pair to
+    :class:`~evalcore.models.Preference` per ranked pair to
     ``preferences_path``. Panels are derived exactly like :func:`serve`.
     """
     _RankHandler.app = _RankApp(

@@ -1,13 +1,13 @@
-"""Markdown reporter - the default. Delegates to :mod:`evalkit.report`.
+"""Markdown reporter - the default. Delegates to :mod:`evalcore.report`.
 
-The Markdown renderers live in ``evalkit.report`` (and are re-used directly
+The Markdown renderers live in ``evalcore.report`` (and are re-used directly
 by the CLI's sweep/pairwise/agreement output); this class exposes them
 through the pluggable reporter seam so ``--report markdown`` and a custom
 reporter share one interface.
 """
 
-from evalkit import models, report
-from evalkit.reporters import base
+from evalcore import models, report
+from evalcore.reporters import base
 
 
 @base.register('markdown')

@@ -11,8 +11,8 @@ fixtures file maps ``case_id`` to per-variant recorded outputs::
 Each recorded value becomes ``Output.fields`` for that (case, variant).
 """
 
-from evalkit import loader, models
-from evalkit.adapters import base
+from evalcore import loader, models
+from evalcore.adapters import base
 
 
 @base.register('replay')

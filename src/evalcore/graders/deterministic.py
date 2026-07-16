@@ -7,8 +7,8 @@ runner aggregates them into a pass-rate.
 
 import re
 
-from evalkit import models, refs
-from evalkit.graders import base
+from evalcore import models, refs
+from evalcore.graders import base
 
 
 def _context(case: models.Case, output: models.Output) -> dict:

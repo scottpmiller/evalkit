@@ -2,7 +2,7 @@
 
 import typing
 
-from evalkit import models
+from evalcore import models
 
 
 @typing.runtime_checkable

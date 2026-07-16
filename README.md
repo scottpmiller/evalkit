@@ -1,14 +1,14 @@
-# evalkit
+# evalcore
 
 A small, **consumer-agnostic** evaluation engine for prompt, model, and API
 outputs. It detects regressions and improvements as prompts and models change,
 by scoring a candidate against a baseline over a fixed dataset and applying
 guardrails + a headline win metric to produce a gate verdict.
 
-evalkit knows nothing about any particular system under test. A consumer
-supplies four things; evalkit supplies everything else:
+evalcore knows nothing about any particular system under test. A consumer
+supplies four things; evalcore supplies everything else:
 
-| Consumer provides (data + small plug-ins) | evalkit provides |
+| Consumer provides (data + small plug-ins) | evalcore provides |
 | --- | --- |
 | an **adapter** config (how to call the system + the knobs a variant sets) | runner (N-sampling), comparison/regression engine |
 | **datasets** (cases with opaque `input`/`expected` blobs) | grader registry + generic graders |
@@ -23,12 +23,11 @@ offline) and doubles as an end-to-end usage reference.
 ## Install
 
 ```bash
-pip install evalcore          # distribution name; imports as `evalkit`
+pip install evalcore
 ```
 
-The PyPI package is **`evalcore`** (the name `evalkit` was taken); the import
-package and CLI are still `evalkit` (`import evalkit`, `evalkit --help`). Extras:
-`evalcore[http]`, `evalcore[judge]`.
+Imports as `evalcore` (`import evalcore`); CLI is `evalcore` (`evalcore --help`).
+Extras: `evalcore[http]` (live HTTP adapter), `evalcore[judge]` (live LLM judge).
 
 ## Develop
 
@@ -144,8 +143,8 @@ the suite. Subclassing the http adapter is often the shortest path.
 input into structured `Output.fields` your graders can score:
 
 ```python
-from evalkit import models
-from evalkit.adapters import base, http
+from evalcore import models
+from evalcore.adapters import base, http
 
 @base.register('my_service_json')
 class MyAdapter(http.HTTPAdapter):
@@ -384,18 +383,18 @@ reported informationally.
 
 ```bash
 # one variant -> scorecard (optionally saved)
-evalkit --plugins my_service.graders run \
+evalcore --plugins my_service.graders run \
     --suite my_service/suite.yaml --variant candidate --mode replay \
     --out candidate.scorecard.json --revision "$GIT_SHA"
 
 # the CI workhorse: run baseline+candidate, compare, exit 1 on 'fail'
-evalkit --plugins my_service.graders gate \
+evalcore --plugins my_service.graders gate \
     --suite my_service/suite.yaml --mode replay \
     --export outbox.jsonl --revision "$GIT_SHA"
 
 # re-compare two previously saved runs (accepts --out scorecards OR
 # --run-out run files)
-evalkit compare --suite my_service/suite.yaml \
+evalcore compare --suite my_service/suite.yaml \
     --baseline old.run.json --candidate new.run.json
 ```
 
@@ -407,7 +406,7 @@ uses; the engine never interprets it).
 `run`, `compare`, and `gate` take `--report markdown` (default) or
 `--report html` for a standalone, self-contained report document (a CI
 artifact or PR attachment). Reporters are a registry seam like adapters and
-graders — register a custom format with `evalkit.reporters.base.register`
+graders — register a custom format with `evalcore.reporters.base.register`
 and select it by name, e.g. `--report pdf`.
 
 **The change loop — run, change, run, compare.** To measure whether a
@@ -415,10 +414,10 @@ change (a prompt edit, a new model, a frontend PR) helped or regressed,
 run the *same variant* before and after and compare the two saved runs:
 
 ```bash
-evalkit ... run --variant candidate --run-out before.run.json --revision before
+evalcore ... run --variant candidate --run-out before.run.json --revision before
 # ... make the change (edit the prompt, point at the PR build, swap the model) ...
-evalkit ... run --variant candidate --run-out after.run.json  --revision after
-evalkit compare --suite my_service/suite.yaml \
+evalcore ... run --variant candidate --run-out after.run.json  --revision after
+evalcore compare --suite my_service/suite.yaml \
     --baseline before.run.json --candidate after.run.json      # deltas + verdict
 ```
 
@@ -433,7 +432,7 @@ version is `examples/quickstart/run_eval.py`:
 
 ```python
 import my_service.graders  # noqa: F401  (registers custom types)
-from evalkit import compare, loader, report, runner, store
+from evalcore import compare, loader, report, runner, store
 
 suite = loader.load_suite('my_service/suite.yaml')
 baseline = runner.run_suite_sync(suite, 'baseline', mode='replay',
@@ -596,9 +595,9 @@ trail. Re-run with `--resume` and it reuses the recorded results and invokes
 only what's missing, reusing the original `run_id`:
 
 ```bash
-evalkit run --suite suite.yaml --variant candidate --checkpoint run.ckpt
+evalcore run --suite suite.yaml --variant candidate --checkpoint run.ckpt
 # ... interrupted after 40/100 cases ...
-evalkit run --suite suite.yaml --variant candidate --checkpoint run.ckpt --resume
+evalcore run --suite suite.yaml --variant candidate --checkpoint run.ckpt --resume
 ```
 
 The checkpoint's meta line records `suite_hash`/`dataset_hash`, so a resume
@@ -611,17 +610,17 @@ drop their lines from the checkpoint first.
 ## Human rating & judge calibration
 
 An LLM judge is only trustworthy as a win metric once you've checked it
-tracks human taste. evalkit closes that loop over the persisted runs:
+tracks human taste. evalcore closes that loop over the persisted runs:
 
 ```bash
 # blind rating web app over one or more saved runs (repeat --run to blind
 # across variants: the browser never sees which model produced an output)
-evalkit rate --run cand.run.json --run base.run.json \
+evalcore rate --run cand.run.json --run base.run.json \
     --ratings ratings.jsonl --dimensions visual_design,copy_quality \
     --content-ref output.html            # or a screenshot via artifacts.*
 
 # how well the judge agreed with the humans, per dimension
-evalkit agreement --run cand.run.json --ratings ratings.jsonl \
+evalcore agreement --run cand.run.json --ratings ratings.jsonl \
     --dimensions visual_design,copy_quality --judge-name quality
 ```
 
@@ -653,12 +652,12 @@ dimension:
 
 ```bash
 # blind side-by-side ranking web app over two saved runs
-evalkit rank --run-a base.run.json --run-b cand.run.json \
+evalcore rank --run-a base.run.json --run-b cand.run.json \
     --preferences prefs.jsonl --dimensions visual_design,copy_quality \
     --content-ref output.html
 
 # human A-vs-B win-rate (overall + per dimension) from the collected file
-evalkit preferences --run-a base.run.json --run-b cand.run.json \
+evalcore preferences --run-a base.run.json --run-b cand.run.json \
     --preferences prefs.jsonl --report html --report-out prefs.html
 ```
 
@@ -684,10 +683,10 @@ re-record judge fixtures cheaply.
 
 ```bash
 # N-way: run every variant (or a subset) and rank them by the win metric
-evalkit sweep --suite suite.yaml --mode replay          # or --variants a,b,c
+evalcore sweep --suite suite.yaml --mode replay          # or --variants a,b,c
 
 # A-vs-B: a judge picks a winner per case -> A's win-rate
-evalkit pairwise --suite suite.yaml --a baseline --b candidate --mode replay
+evalcore pairwise --suite suite.yaml --a baseline --b candidate --mode replay
 ```
 
 `sweep` prints a ranked leaderboard plus a full metric × variant matrix (a
@@ -696,7 +695,7 @@ per-variant runner unchanged; it's pure orchestration + tabulation.
 
 `pairwise` is the sharper subjective signal: instead of scoring each output
 in isolation, a judge is shown **both** variants' outputs for the same case
-and picks a winner, and evalkit reports A's win-rate (ties count half).
+and picks a winner, and evalcore reports A's win-rate (ties count half).
 Order is **counterbalanced** — each pair is judged both ways and a pick that
 flips when you swap the order collapses to a tie, so position bias can't
 manufacture a winner. Configure it under `thresholds.pairwise` (`content_ref`,
@@ -738,16 +737,16 @@ Built-ins: `http` + `replay` adapters; `classification`, `max_chars`,
 `regex_absent`, `regex_present`, `non_empty`, and `llm_judge` graders; and
 `markdown` + `html` reporters (single scorecards and comparative
 comparisons; pick one with `--report`). Register more with
-`evalkit.adapters.base.register` / `evalkit.graders.base.register` /
-`evalkit.reporters.base.register` and load them with `--plugins your.module`
+`evalcore.adapters.base.register` / `evalcore.graders.base.register` /
+`evalcore.reporters.base.register` and load them with `--plugins your.module`
 (CLI) or a plain import (Python API). If onboarding a new consumer ever
-requires touching `src/evalkit/`, that's an abstraction leak — fix the engine
+requires touching `src/evalcore/`, that's an abstraction leak — fix the engine
 seam, don't fork it.
 
 ## Layout
 
 ```
-src/evalkit/
+src/evalcore/
   models.py      Case, Variant, Output, Score, Scorecard, Comparison (opaque-blob based)
   refs.py        $ref resolution (the only thing that opens a consumer's blobs)
   loader.py      suite + dataset loading, content hashes (YAML/JSON; suite-relative paths)

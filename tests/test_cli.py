@@ -15,7 +15,7 @@ from unittest import mock
 
 import yaml
 
-from evalkit import cli, models, rating, store
+from evalcore import cli, models, rating, store
 
 SUITE = {
     'project': 'demo',
@@ -121,7 +121,7 @@ class CliPipelineTests(unittest.TestCase):
         code, text = _run_cli(
             [
                 '--plugins',
-                'evalkit.models',
+                'evalcore.models',
                 'run',
                 '--suite',
                 self.suite,

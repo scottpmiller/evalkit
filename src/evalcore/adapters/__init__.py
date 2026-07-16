@@ -10,6 +10,6 @@ that reads results a deployed system already logged to an observability store.
 Importing this package registers the built-in adapter types.
 """
 
-from evalkit.adapters import base, http, replay
+from evalcore.adapters import base, http, replay
 
 __all__ = ['base', 'http', 'replay']

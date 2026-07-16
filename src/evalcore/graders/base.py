@@ -7,7 +7,7 @@ per-case and aggregate buckets the runner needs.
 
 import typing
 
-from evalkit import models
+from evalcore import models
 
 
 @typing.runtime_checkable

@@ -11,9 +11,9 @@ the suite file.
 
 import time
 
-from evalkit import models, refs
-from evalkit.adapters import base
-from evalkit.adapters._env import _expand_env
+from evalcore import models, refs
+from evalcore.adapters import base
+from evalcore.adapters._env import _expand_env
 
 
 @base.register('http')

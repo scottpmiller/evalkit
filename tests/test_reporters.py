@@ -5,8 +5,8 @@ import pathlib
 import tempfile
 import unittest
 
-from evalkit import models, reporters
-from evalkit.reporters import base
+from evalcore import models, reporters
+from evalcore.reporters import base
 
 
 def _card(name='cand', **metrics):

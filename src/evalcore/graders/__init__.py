@@ -13,6 +13,12 @@ custom graders with ``base.register`` and load them via the CLI ``--plugins``
 flag, proving the generic/custom seam.
 """
 
-from evalkit.graders import base, classification, deterministic, judge, numeric
+from evalcore.graders import (
+    base,
+    classification,
+    deterministic,
+    judge,
+    numeric,
+)
 
 __all__ = ['base', 'classification', 'deterministic', 'judge', 'numeric']

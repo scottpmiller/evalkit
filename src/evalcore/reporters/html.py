@@ -11,8 +11,8 @@ import html as _html
 import json
 import pathlib
 
-from evalkit import models
-from evalkit.reporters import base
+from evalcore import models
+from evalcore.reporters import base
 
 
 def _dump(fields: dict) -> str:
@@ -421,6 +421,6 @@ class HtmlReporter:
         return (
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,'
-            'initial-scale=1"><title>evalkit report</title>'
+            'initial-scale=1"><title>evalcore report</title>'
             f'<style>{_CSS}</style></head><body>{body}</body></html>'
         )

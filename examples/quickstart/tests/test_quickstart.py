@@ -10,7 +10,7 @@ import pathlib
 import unittest
 
 import examples.quickstart.graders  # noqa: F401 - registers adapter + graders
-from evalkit import compare, loader, runner
+from evalcore import compare, loader, runner
 
 SUITE_PATH = pathlib.Path(__file__).resolve().parents[1] / 'suite.yaml'
 

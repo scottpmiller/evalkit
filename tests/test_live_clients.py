@@ -14,8 +14,8 @@ import types
 import unittest
 from unittest import mock
 
-from evalkit import models, pairwise
-from evalkit.graders import judge
+from evalcore import models, pairwise
+from evalcore.graders import judge
 
 
 def _fake_anthropic():

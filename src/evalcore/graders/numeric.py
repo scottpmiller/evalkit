@@ -13,8 +13,8 @@ and it's a pure measurement (``passed`` stays ``None``). Non-numeric or absent
 fields degrade to ``value=None`` rather than raising.
 """
 
-from evalkit import models, refs
-from evalkit.graders import base
+from evalcore import models, refs
+from evalcore.graders import base
 
 
 def _context(case: models.Case, output: models.Output) -> dict:

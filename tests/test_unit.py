@@ -4,9 +4,9 @@ import pathlib
 import unittest
 from unittest import mock
 
-from evalkit import compare, models, refs, store
-from evalkit.adapters import _env
-from evalkit.graders import base, classification, deterministic, numeric
+from evalcore import compare, models, refs, store
+from evalcore.adapters import _env
+from evalcore.graders import base, classification, deterministic, numeric
 
 
 def _card(name, **metric_values):

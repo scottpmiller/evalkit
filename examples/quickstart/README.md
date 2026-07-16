@@ -1,4 +1,4 @@
-# quickstart — a worked evalkit consumer
+# quickstart — a worked evalcore consumer
 
 A complete, runnable eval for a **support-reply assistant**. It shows every
 moving part of a consumer in one place and runs **fully offline** (no network,
@@ -30,7 +30,7 @@ From the repo root:
 
 ```bash
 # CLI gate (baseline vs candidate) — offline replay
-evalkit --plugins examples.quickstart.graders gate \
+evalcore --plugins examples.quickstart.graders gate \
     --suite examples/quickstart/suite.yaml --mode replay
 # or: just example
 
@@ -39,7 +39,7 @@ uv run python -m examples.quickstart.run_eval
 # or: just example-api
 
 # Head-to-head A-vs-B win-rate (offline)
-evalkit --plugins examples.quickstart.graders pairwise \
+evalcore --plugins examples.quickstart.graders pairwise \
     --suite examples/quickstart/suite.yaml --a baseline --b candidate --mode replay
 
 # The example's assertions

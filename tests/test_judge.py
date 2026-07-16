@@ -4,8 +4,8 @@ import asyncio
 import unittest
 from unittest import mock
 
-from evalkit import loader, models
-from evalkit.graders import base, judge
+from evalcore import loader, models
+from evalcore.graders import base, judge
 
 DIMENSIONS = [
     {'key': 'clarity', 'description': 'Is it clear?'},
@@ -160,7 +160,7 @@ class RubricJudgeTests(unittest.TestCase):
             content_ref='output.text', dimensions=DIMENSIONS, client=client
         )
         grader.set_retry(loader.RetryConfig(max_attempts=5, jitter=0))
-        with mock.patch('evalkit.retry.asyncio.sleep') as slept:
+        with mock.patch('evalcore.retry.asyncio.sleep') as slept:
             graded = _grade(
                 grader,
                 models.Case(id='c'),

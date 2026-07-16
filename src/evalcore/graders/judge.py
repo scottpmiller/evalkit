@@ -24,7 +24,7 @@ like the target adapter. Judge model + version are recorded on every score;
 pin them and treat a judge change as a re-baseline event.
 
 Pairwise (A-vs-B win-rate) judging is a cross-variant operation and lives in
-:mod:`evalkit.pairwise`, not here - it needs both variants' per-case outputs
+:mod:`evalcore.pairwise`, not here - it needs both variants' per-case outputs
 at once, which a per-case grader never sees.
 """
 
@@ -35,8 +35,8 @@ import pathlib
 import re
 import typing
 
-from evalkit import models, refs, retry
-from evalkit.graders import base
+from evalcore import models, refs, retry
+from evalcore.graders import base
 
 _ENV_RE = re.compile(r'\$\{([A-Z0-9_]+)\}')
 
@@ -256,7 +256,7 @@ class ReplayJudgeClient:
 
     def __init__(self, fixtures: str | dict):
         if isinstance(fixtures, str):
-            from evalkit import loader
+            from evalcore import loader
 
             self._fixtures = loader.load_data_file(fixtures)
         else:

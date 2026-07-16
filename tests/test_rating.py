@@ -4,7 +4,7 @@ import pathlib
 import tempfile
 import unittest
 
-from evalkit import models, rating, store
+from evalcore import models, rating, store
 
 
 def _run(pairs, run_id='R'):

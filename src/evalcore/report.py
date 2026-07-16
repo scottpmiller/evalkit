@@ -1,6 +1,6 @@
 """Markdown rendering of scorecards and comparisons (CI / PR comments)."""
 
-from evalkit import models
+from evalcore import models
 
 
 def _fmt(value: float | None) -> str:

@@ -4,7 +4,7 @@ import asyncio
 import unittest
 from unittest import mock
 
-from evalkit import retry
+from evalcore import retry
 
 
 class BackoffTests(unittest.TestCase):

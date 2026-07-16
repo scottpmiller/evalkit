@@ -3,7 +3,7 @@
 import asyncio
 import unittest
 
-from evalkit import models, pairwise
+from evalcore import models, pairwise
 
 
 class BuildClientTests(unittest.TestCase):

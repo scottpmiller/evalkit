@@ -7,7 +7,7 @@ tabulate one leaderboard (metric x variant) and a ranking by the suite's
 win metric. Purely a run-orchestration + summary layer; no new seams.
 """
 
-from evalkit import loader, models, runner
+from evalcore import loader, models, runner
 
 
 async def run_sweep(

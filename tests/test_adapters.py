@@ -6,9 +6,9 @@ from unittest import mock
 
 import httpx
 
-from evalkit import models
-from evalkit.adapters import base, replay
-from evalkit.adapters import http as http_adapter
+from evalcore import models
+from evalcore.adapters import base, replay
+from evalcore.adapters import http as http_adapter
 
 
 class _FakeResponse:

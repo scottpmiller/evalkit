@@ -1,4 +1,4 @@
-# evalkit quickstart suite: a support-reply eval.
+# evalcore quickstart suite: a support-reply eval.
 #
 # One suite exercising every grader family against a deterministic offline
 # stub, so it runs with no network and no API keys:
@@ -10,7 +10,7 @@
 #   - a head-to-head pairwise config
 #
 # Run it:
-#   evalkit --plugins examples.quickstart.graders gate \
+#   evalcore --plugins examples.quickstart.graders gate \
 #       --suite examples/quickstart/suite.yaml --mode replay
 #
 # Paths are relative to this file.
@@ -92,7 +92,7 @@ thresholds:
       min: 1.0
     - metric: errors
       max: 0
-  # Head-to-head A-vs-B judging (evalkit pairwise --a baseline --b candidate).
+  # Head-to-head A-vs-B judging (evalcore pairwise --a baseline --b candidate).
   # Live uses `model`; replay uses recorded, order-independent judgments.
   pairwise:
     content_ref: output.reply

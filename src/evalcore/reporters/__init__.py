@@ -2,11 +2,14 @@
 
 Importing this package registers the built-in ``markdown`` and ``html``
 reporters. Select one with :func:`build_reporter` (the CLI's ``--report``
-flag), and register more with ``@evalkit.reporters.base.register(...)``.
+flag), and register more with ``@evalcore.reporters.base.register(...)``.
 """
 
-from evalkit.reporters import html, markdown  # noqa: F401 - register built-ins
-from evalkit.reporters.base import (
+from evalcore.reporters import (  # noqa: F401 - register built-ins
+    html,
+    markdown,
+)
+from evalcore.reporters.base import (
     Reporter,
     build_reporter,
     per_case_matrix,

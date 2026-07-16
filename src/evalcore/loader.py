@@ -11,8 +11,8 @@ import pathlib
 
 import pydantic
 
-from evalkit import models
-from evalkit.retry import RetryConfig  # re-exported: SuiteConfig.retry type
+from evalcore import models
+from evalcore.retry import RetryConfig  # re-exported: SuiteConfig.retry type
 
 
 def content_hash(data) -> str:

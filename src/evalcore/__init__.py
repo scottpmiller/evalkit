@@ -1,4 +1,4 @@
-"""evalkit - a generic, consumer-agnostic evaluation engine.
+"""evalcore - a generic, consumer-agnostic evaluation engine.
 
 The engine knows nothing about any particular system under test. A consumer
 supplies four things as data/plug-ins:
@@ -14,7 +14,7 @@ reporting - lives here and is reused unchanged across consumers.
 See ``docs/evals/platform-design.md`` for the full design.
 """
 
-from evalkit import (
+from evalcore import (
     adapters,
     compare,
     graders,

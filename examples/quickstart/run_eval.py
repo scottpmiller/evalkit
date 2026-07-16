@@ -1,6 +1,6 @@
-"""Drive the quickstart suite through evalkit's Python API - no CLI involved.
+"""Drive the quickstart suite through evalcore's Python API - no CLI involved.
 
-Everything ``evalkit gate`` does, as plain library calls:
+Everything ``evalcore gate`` does, as plain library calls:
 
 1. load the suite + dataset (``loader``);
 2. run baseline and candidate (``runner``) with ``revision``/``created_at``;
@@ -24,7 +24,7 @@ import pathlib
 import sys
 
 import examples.quickstart.graders  # noqa: F401 - registers plug-ins
-from evalkit import compare, loader, report, runner, store
+from evalcore import compare, loader, report, runner, store
 
 HERE = pathlib.Path(__file__).resolve().parent
 

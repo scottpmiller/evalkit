@@ -7,9 +7,9 @@ import typing
 import unittest
 from unittest import mock
 
-from evalkit import loader, models, runner, store
-from evalkit.adapters import base as adapters_base
-from evalkit.graders import base as graders_base
+from evalcore import loader, models, runner, store
+from evalcore.adapters import base as adapters_base
+from evalcore.graders import base as graders_base
 
 
 @adapters_base.register('_rec')
