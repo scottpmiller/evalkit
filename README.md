@@ -23,12 +23,12 @@ offline) and doubles as an end-to-end usage reference.
 ## Install
 
 ```bash
-pip install ai-evalkit          # distribution name; imports as `evalkit`
+pip install evalcore          # distribution name; imports as `evalkit`
 ```
 
-The PyPI package is **`ai-evalkit`** (the name `evalkit` was taken); the import
+The PyPI package is **`evalcore`** (the name `evalkit` was taken); the import
 package and CLI are still `evalkit` (`import evalkit`, `evalkit --help`). Extras:
-`ai-evalkit[http]`, `ai-evalkit[judge]`.
+`evalcore[http]`, `evalcore[judge]`.
 
 ## Develop
 
@@ -794,10 +794,10 @@ Known gaps / next:
 
 ## Releasing
 
-Releases publish to PyPI as **`ai-evalkit`** via
+Releases publish to PyPI as **`evalcore`** via
 [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC) — no API
 tokens are stored. One-time setup on PyPI: add a *pending publisher* for project
-`ai-evalkit` pointing at owner `scottpmiller`, repo `ai-evalkit`, workflow
+`evalcore` pointing at owner `scottpmiller`, repo `evalcore`, workflow
 `publish.yml`, environment `pypi`. Then to cut a release: bump `version` in
 `pyproject.toml`, tag it, and publish a GitHub Release — `.github/workflows/publish.yml`
 builds the sdist + wheel and uploads them. (Point it at TestPyPI first for a dry run.)

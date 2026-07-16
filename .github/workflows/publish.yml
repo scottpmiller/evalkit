@@ -2,7 +2,7 @@ name: Publish to PyPI
 
 # Publishes to PyPI via Trusted Publishing (OIDC) when a GitHub Release is
 # published - no API tokens stored anywhere. Configure a matching "pending
-# publisher" on PyPI first (see README): project ai-evalkit, this repo, this
+# publisher" on PyPI first (see README): project evalcore, this repo, this
 # workflow file (publish.yml), environment "pypi".
 
 on:

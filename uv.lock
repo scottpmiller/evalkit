@@ -3,50 +3,6 @@ revision = 3
 requires-python = ">=3.14"
 
 [[package]]
-name = "ai-evalkit"
-version = "0.1.0"
-source = { editable = "." }
-dependencies = [
-    { name = "pydantic" },
-    { name = "pyyaml" },
-]
-
-[package.optional-dependencies]
-http = [
-    { name = "httpx" },
-]
-judge = [
-    { name = "anthropic" },
-    { name = "openai" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "coverage" },
-    { name = "httpx" },
-    { name = "pre-commit" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "anthropic", marker = "extra == 'judge'", specifier = ">=0.40" },
-    { name = "httpx", marker = "extra == 'http'", specifier = ">=0.27" },
-    { name = "openai", marker = "extra == 'judge'", specifier = ">=1.40" },
-    { name = "pydantic", specifier = ">=2.7,<3" },
-    { name = "pyyaml", specifier = ">=6,<7" },
-]
-provides-extras = ["http", "judge"]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "coverage", extras = ["toml"], specifier = "~=7.14.0" },
-    { name = "httpx", specifier = ">=0.27" },
-    { name = "pre-commit", specifier = "~=4.5.1" },
-    { name = "ruff", specifier = "~=0.15.2" },
-]
-
-[[package]]
 name = "annotated-types"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -177,6 +133,50 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e0/4d/f332313098c1de1b2d2ff91cf2674415cc7cddab2ca1b01ae29774bd5fdf/docstring_parser-0.18.0.tar.gz", hash = "sha256:292510982205c12b1248696f44959db3cdd1740237a968ea1e2e7a900eeb2015", size = 29341, upload-time = "2026-04-14T04:09:19.867Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a7/5f/ed01f9a3cdffbd5a008556fc7b2a08ddb1cc6ace7effa7340604b1d16699/docstring_parser-0.18.0-py3-none-any.whl", hash = "sha256:b3fcbed555c47d8479be0796ef7e19c2670d428d72e96da63f3a40122860374b", size = 22484, upload-time = "2026-04-14T04:09:18.638Z" },
+]
+
+[[package]]
+name = "evalcore"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "pydantic" },
+    { name = "pyyaml" },
+]
+
+[package.optional-dependencies]
+http = [
+    { name = "httpx" },
+]
+judge = [
+    { name = "anthropic" },
+    { name = "openai" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "coverage" },
+    { name = "httpx" },
+    { name = "pre-commit" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "anthropic", marker = "extra == 'judge'", specifier = ">=0.40" },
+    { name = "httpx", marker = "extra == 'http'", specifier = ">=0.27" },
+    { name = "openai", marker = "extra == 'judge'", specifier = ">=1.40" },
+    { name = "pydantic", specifier = ">=2.7,<3" },
+    { name = "pyyaml", specifier = ">=6,<7" },
+]
+provides-extras = ["http", "judge"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "coverage", extras = ["toml"], specifier = "~=7.14.0" },
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "pre-commit", specifier = "~=4.5.1" },
+    { name = "ruff", specifier = "~=0.15.2" },
 ]
 
 [[package]]
