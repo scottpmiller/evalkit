@@ -797,7 +797,7 @@ Known gaps / next:
 Releases publish to PyPI as **`ai-evalkit`** via
 [Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC) — no API
 tokens are stored. One-time setup on PyPI: add a *pending publisher* for project
-`ai-evalkit` pointing at owner `scottpmiller`, repo `evalkit`, workflow
+`ai-evalkit` pointing at owner `scottpmiller`, repo `ai-evalkit`, workflow
 `publish.yml`, environment `pypi`. Then to cut a release: bump `version` in
 `pyproject.toml`, tag it, and publish a GitHub Release — `.github/workflows/publish.yml`
 builds the sdist + wheel and uploads them. (Point it at TestPyPI first for a dry run.)

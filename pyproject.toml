@@ -22,9 +22,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/scottpmiller/evalkit"
-Repository = "https://github.com/scottpmiller/evalkit"
-Issues = "https://github.com/scottpmiller/evalkit/issues"
+Homepage = "https://github.com/scottpmiller/ai-evalkit"
+Repository = "https://github.com/scottpmiller/ai-evalkit"
+Issues = "https://github.com/scottpmiller/ai-evalkit/issues"
 
 [project.optional-dependencies]
 # Needed only by the http target adapter (live runs). Replay/offline needs none.
