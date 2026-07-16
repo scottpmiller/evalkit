@@ -13,10 +13,11 @@ flips with order collapses to a tie. The judge client is pluggable and
 mode-selected (Anthropic / OpenAI / replay) exactly like the rubric judge.
 """
 
+import json
 import os
 import typing
 
-from evalcore import models, refs
+from evalcore import loader, models, refs
 
 _SYSTEM = (
     'You are a careful, unbiased evaluator comparing two candidate '
@@ -71,7 +72,7 @@ class AnthropicPairwiseClient:
         self.timeout = timeout
 
     async def compare(self, *, system, user, first, second) -> str:
-        import anthropic
+        import anthropic  # optional dependency (the `judge` extra)
 
         tool = _tool()
         async with anthropic.AsyncAnthropic(
@@ -112,9 +113,7 @@ class OpenAIPairwiseClient:
         self.timeout = timeout
 
     async def compare(self, *, system, user, first, second) -> str:
-        import json
-
-        import openai
+        import openai  # optional dependency (the `judge` extra)
 
         response_format = {
             'type': 'json_schema',
@@ -168,8 +167,6 @@ class ReplayPairwiseClient:
 
     def __init__(self, fixtures: str | list):
         if isinstance(fixtures, str):
-            from evalcore import loader
-
             fixtures = loader.load_data_file(fixtures)
         # load_data_file returns {} for a bare list file under JSON fallback;
         # accept either a list or a {'pairs': [...]} mapping.

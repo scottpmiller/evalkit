@@ -24,6 +24,7 @@ import pathlib
 import random
 import statistics
 import threading
+import urllib.parse
 import webbrowser
 
 from evalcore import models, refs, store
@@ -756,8 +757,6 @@ class _Handler(_BaseHandler):
     app: _RatingApp
 
     def do_GET(self):
-        import urllib.parse
-
         parsed = urllib.parse.urlparse(self.path)
         query = urllib.parse.parse_qs(parsed.query)
         if parsed.path == '/':
@@ -1241,8 +1240,6 @@ class _RankHandler(_BaseHandler):
     app: _RankApp
 
     def do_GET(self):
-        import urllib.parse
-
         parsed = urllib.parse.urlparse(self.path)
         query = urllib.parse.parse_qs(parsed.query)
         if parsed.path == '/':

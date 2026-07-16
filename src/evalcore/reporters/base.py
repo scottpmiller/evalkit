@@ -26,7 +26,7 @@ happens once, at the edge, so fragments compose (a ``run`` body and an
 
 import typing
 
-from evalcore import models
+from evalcore import models, report
 
 
 @typing.runtime_checkable
@@ -128,8 +128,6 @@ def render_agreement(
     render = getattr(reporter, 'agreement', None)
     if callable(render):
         return render(result)
-    from evalcore import report
-
     return report.render_agreement(result)
 
 
@@ -141,8 +139,6 @@ def render_preferences(
     render = getattr(reporter, 'preferences', None)
     if callable(render):
         return render(result)
-    from evalcore import report
-
     return report.render_preferences(result)
 
 
@@ -154,8 +150,6 @@ def render_pairwise_agreement(
     render = getattr(reporter, 'pairwise_agreement', None)
     if callable(render):
         return render(result)
-    from evalcore import report
-
     return report.render_pairwise_agreement(result)
 
 
@@ -165,8 +159,6 @@ def render_sweep(reporter: Reporter, result: models.SweepResult) -> str:
     render = getattr(reporter, 'sweep', None)
     if callable(render):
         return render(result)
-    from evalcore import report
-
     return report.render_sweep(result)
 
 
@@ -176,6 +168,4 @@ def render_pairwise(reporter: Reporter, result: models.PairwiseResult) -> str:
     render = getattr(reporter, 'pairwise', None)
     if callable(render):
         return render(result)
-    from evalcore import report
-
     return report.render_pairwise(result)

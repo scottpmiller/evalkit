@@ -30,12 +30,13 @@ at once, which a per-case grader never sees.
 
 import base64
 import functools
+import json
 import os
 import pathlib
 import re
 import typing
 
-from evalcore import models, refs, retry
+from evalcore import loader, models, refs, retry
 from evalcore.graders import base
 
 _ENV_RE = re.compile(r'\$\{([A-Z0-9_]+)\}')
@@ -132,7 +133,7 @@ class AnthropicJudgeClient:
     async def judge(
         self, *, key, system, user, dimensions, scale, images=None
     ) -> dict:
-        import anthropic
+        import anthropic  # optional dependency (the `judge` extra)
 
         tool = self._tool(dimensions, scale)
         content: list[dict] = [{'type': 'text', 'text': user}]
@@ -215,9 +216,7 @@ class OpenAIJudgeClient:
     async def judge(
         self, *, key, system, user, dimensions, scale, images=None
     ) -> dict:
-        import json
-
-        import openai
+        import openai  # optional dependency (the `judge` extra)
 
         content: list[dict] = [{'type': 'text', 'text': user}]
         for image in images or []:
@@ -256,8 +255,6 @@ class ReplayJudgeClient:
 
     def __init__(self, fixtures: str | dict):
         if isinstance(fixtures, str):
-            from evalcore import loader
-
             self._fixtures = loader.load_data_file(fixtures)
         else:
             self._fixtures = fixtures
