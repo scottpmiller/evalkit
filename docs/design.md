@@ -20,7 +20,7 @@ adapter + datasets + graders config," not "fork the framework." If it leaks,
 every new consumer reopens the core.
 
 This shape is well-trodden - promptfoo, OpenAI Evals, Braintrust, and LangSmith
-all converge on the same pipeline (case → target → graders → comparison →
+all converge on the same pipeline (case -> target -> graders -> comparison ->
 gate). evalcore is not inventing the abstraction; it is drawing the line so the
 engine stays reusable across unrelated systems.
 
@@ -28,21 +28,21 @@ engine stays reusable across unrelated systems.
 
 | Concern | **Engine** | **Consumer** |
 |---|---|---|
-| Case / suite schema + loading | ✅ | uses it |
-| Runner: sampling (N), concurrency, live/replay modes | ✅ | picks mode/config |
-| Target-adapter protocol + built-ins (HTTP, replay) | ✅ | configures/extends |
-| Variant model (baseline vs candidate knobs) | ✅ opaque dict | defines its knobs |
-| Grader protocol + registry | ✅ | registers its graders |
-| Generic graders: deterministic, LLM-judge, classification, numeric | ✅ | configures + writes custom |
-| Comparison / regression engine (win metric, guardrails) | ✅ | sets thresholds |
-| Gate decision (comparison → pass/warn/fail) | ✅ | sets policy |
-| Results store + row schema / outbox | ✅ | gets a `project` namespace |
-| Reporters (Markdown / HTML) | ✅ | gets them free |
-| Datasets (cases + labels) | ❌ | ✅ owns |
-| Judge **rubrics** | ❌ | ✅ owns |
-| Custom graders / adapters | ❌ | ✅ owns |
-| Thresholds / guardrail config | ❌ | ✅ owns |
-| Which suite runs on which change trigger | ❌ | ✅ owns |
+| Case / suite schema + loading | yes | uses it |
+| Runner: sampling (N), concurrency, live/replay modes | yes | picks mode/config |
+| Target-adapter protocol + built-ins (HTTP, replay) | yes | configures/extends |
+| Variant model (baseline vs candidate knobs) | yes opaque dict | defines its knobs |
+| Grader protocol + registry | yes | registers its graders |
+| Generic graders: deterministic, LLM-judge, classification, numeric | yes | configures + writes custom |
+| Comparison / regression engine (win metric, guardrails) | yes | sets thresholds |
+| Gate decision (comparison -> pass/warn/fail) | yes | sets policy |
+| Results store + row schema / outbox | yes | gets a `project` namespace |
+| Reporters (Markdown / HTML) | yes | gets them free |
+| Datasets (cases + labels) | no | yes owns |
+| Judge **rubrics** | no | yes owns |
+| Custom graders / adapters | no | yes owns |
+| Thresholds / guardrail config | no | yes owns |
+| Which suite runs on which change trigger | no | yes owns |
 
 Everything in the left column is consumer-agnostic. The right column is what a
 new team writes.
@@ -66,12 +66,12 @@ Eight concepts, none of which mention any particular system:
   own for anything else.
 - **Grader** - `grade(case, output) -> [Score]` where
   `Score = {metric, value, passed?, detail}`. Registry-based; tiered
-  (deterministic → numeric → classification → LLM judge).
-- **Run** - execute `suite × variant` over all cases × N samples → outputs +
+  (deterministic -> numeric -> classification -> LLM judge).
+- **Run** - execute `suite × variant` over all cases × N samples -> outputs +
   scores, persisted as a `RunResult`.
 - **Scorecard** - aggregated scores for one run (mean/stdev per metric).
-- **Comparison + Gate** - candidate scorecard vs baseline → deltas, guardrail
-  checks, win metric → `pass | warn | fail`.
+- **Comparison + Gate** - candidate scorecard vs baseline -> deltas, guardrail
+  checks, win metric -> `pass | warn | fail`.
 
 ```python
 class TargetAdapter(typing.Protocol):
